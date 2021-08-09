@@ -35,7 +35,7 @@
             <img 
                 class="is-rounded" 
                 id="js-img" 
-                src="./js.svg" 
+                src="./web_js.png" 
                 alt="JS"
             >
         </figure>
@@ -52,6 +52,7 @@
             const img = document.getElementById('js-img');
             try {
                 const imgFetch = await fetch(img.src);
+                console.log(imgFetch);
                 const imgBlob = await imgFetch.blob();
                 const file = new File([imgBlob], 'js_image.png', imgBlob);
                 filesArray.push(file);
