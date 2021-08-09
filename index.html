@@ -52,7 +52,7 @@
             const img = document.getElementById('js-img');
             try {
                 const imgFetch = await fetch(img.src);
-                const imgBlob = await imgFetch.blog();
+                const imgBlob = await imgFetch.blob();
                 const file = new File([imgBlob], 'js_image.png', imgBlob);
                 filesArray.push(file);
                 if (navigator.canShare && navigator.canShare({ files: filesArray })) {
