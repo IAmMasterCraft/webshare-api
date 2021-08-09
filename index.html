@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta 
+        name="viewport" 
+        content="width=device-width, initial-scale=1" 
+    />
+
+    <title>Web Share API Demo</title>
+    <meta
+      name="description"
+      content="A simple demonstration of webshare API"
+    />
+    <meta 
+        name="author" 
+        content="MasterCraft"
+    />
+
+    <link 
+        rel="stylesheet" 
+        href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- your content here... -->
+    <div 
+        class="container m-6"
+    >
+        <figure 
+            class="image is-128x128"
+        >
+            <img 
+                class="is-rounded" 
+                id="js-img" 
+                src="./js.svg" 
+                alt="JS"
+            >
+        </figure>
+        <button 
+            class="button is-success my-3"
+            onclick="shareImage()"
+        >
+            SHARE IMAGE
+        </button>
+    </div>
+    <script>
+        const shareImage = async () => {
+            const filesArray = [];
+            const img = document.getElementById('js-img');
+            try {
+                const imgFetch = await fetch(img.src);
+                const imgBlob = await imgFetch.blog();
+                const file = new File([imgBlob], 'js_image.png', imgBlob);
+                filesArray.push(file);
+                if (navigator.canShare && navigator.canShare({ files: filesArray })) {
+                    const oyaShareNow = await navigator.share({
+                        files: filesArray,
+                        title: 'Image File',
+                        text: 'Sample image file.',
+                    });
+                    console.log(oyaShareNow);
+                } else {
+                    console.log(`Your machine doesn't support sharing files.`);
+                    alert(`Your machine doesn't support sharing files.`);
+                }
+            } catch (err) {
+                console.log(err.message);
+            }
+            
+        }
+    </script>
+  </body>
+</html>
